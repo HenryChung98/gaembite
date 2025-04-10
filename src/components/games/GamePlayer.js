@@ -1,8 +1,14 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import "@/app/unity.css";
 
+import GameNavBar from "./GameNavBar";
+
 export default function GamePlayer({ game }) {
+  const router = useRouter();
+  const [isNavVisible, setIsNavVisible] = useState(false);
+
   const [isMobile, setIsMobile] = useState(false);
   const unityInstanceRef = useRef(null);
   const scriptRef = useRef(null);
@@ -100,6 +106,7 @@ export default function GamePlayer({ game }) {
       id="unity-container"
       className={isMobile ? "unity-mobile" : "unity-desktop"}
     >
+      <GameNavBar />
       <canvas
         id="unity-canvas"
         style={{
@@ -119,12 +126,9 @@ export default function GamePlayer({ game }) {
         <div id="unity-footer">
           <div id="unity-webgl-logo"></div>
           <div id="unity-fullscreen-button"></div>
-          <div id="unity-build-title">{game.title}</div>
+          {/* <div id="unity-build-title">{game.title}</div> */}
         </div>
       )}
-      <p style={{ textAlign: "center", margin: "10px 0" }}>
-        If the game sound overlaps, please refresh the page.
-      </p>
     </div>
   );
 }

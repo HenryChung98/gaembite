@@ -1,4 +1,4 @@
-## [Gaem Bite](https://game-bite.vercel.app/)
+## [Gaem Bite](https://gaembite.vercel.app/)
 
 ### Frameworks
 
@@ -6,7 +6,7 @@
 
 ### Libraries
 
-- 1
+- [React Icons](https://react-icons.github.io/react-icons/)
 
 ### Resources
 
