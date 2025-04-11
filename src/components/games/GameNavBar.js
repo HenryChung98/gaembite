@@ -22,18 +22,21 @@ export default function GameNavBar() {
                   transform transition-transform duration-300 ease-in-out
                   ${isNavVisible ? "translate-y-0" : "-translate-y-full"}`}
       >
-        <div className="text-white text-center border bg-indigo-500 p-3 m-1 rounded-xl">
-          If the game sound overlaps, please refresh the page.
-        </div>
-        <div
-          className="text-white text-center border bg-indigo-500 p-5 m-1 rounded-xl"
+        <button
+          className="text-white text-center border bg-indigo-500 p-3 m-1 rounded-xl"
+          onClick={() => window.location.reload()}
+        >
+          If the game sounds are overlapping, please press here
+        </button>
+        <button
+          className="text-white text-center border bg-indigo-500 p-3 m-1 rounded-xl"
           onClick={(e) => {
             e.preventDefault();
             router.push("/games");
           }}
         >
           View More Games
-        </div>
+        </button>
       </nav>
     </>
   );
