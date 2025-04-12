@@ -11,12 +11,13 @@ export const games = [
   },
   {
     id: "balancegame",
-    title: "Balance Game",
-    description: "balance game",
-    thumbnail: "/unity/balance-game/test.png",
+    title: "Balance Gaem",
+    description: "balance gaem",
+    thumbnail: "/unity/balance-game/balance-game-thumbnail.webp",
     buildPath: "/unity/balance-game/Build",
     width: 720,
     height: 1280,
     mobile: true,
   },
+  
 ];
