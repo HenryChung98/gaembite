@@ -1,3 +1,7 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+
 const SectionComponent = ({ title, des }) => {
   return (
     <>
@@ -10,12 +14,23 @@ const SectionComponent = ({ title, des }) => {
 };
 
 export default function Credits() {
+  const router = useRouter();
   return (
     <div className="flex flex-col gap-4 p-6 max-w-md mx-auto bg-zinc-700 rounded-2xl shadow-md text-base text-gray-800">
-      <h2 className="text-2xl font-extrabold text-indigo-400 mb-4">
-        Game Credits
-      </h2>
-
+      <div className="flex justify-between">
+        <h2 className="text-2xl font-extrabold text-indigo-400 mb-4">
+          Game Credits
+        </h2>
+        <button
+        className="bg-indigo-300 rounded-xl p-1 relative "
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/");
+          }}
+        >
+          <IoArrowBackCircleOutline size={35} />
+        </button>
+      </div>
       <div className="flex">
         <span className="w-40 font-bold text-sm text-gray-200">Developer:</span>
         <span>

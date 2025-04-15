@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Home() {
   const [isBounceStopped, setIsBounceStopped] = useState(false);
   const linkDesign =
-    "w-full bg-zinc-700 text-gray-200 p-2 border-1 rounded-xl uppercase font-bold hover:opacity-50 duration-100";
+    "w-full bg-zinc-700 text-gray-200 p-3 border-1 rounded-xl uppercase font-bold hover:opacity-50 duration-100";
 
   return (
     <div className="flex flex-col gap-3 items-center justify-center text-center h-screen">
