@@ -11,7 +11,7 @@ export default async function CategoryPage({ params }) {
   if (filteredGames.length === 0) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <NotFound message="No games found in this category" />
+        <NotFound message="game category page" />
       </div>
     );
   }

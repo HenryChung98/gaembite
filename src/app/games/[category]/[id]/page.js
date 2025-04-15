@@ -10,7 +10,7 @@ export default async function GamePage({ params }) {
   if (!game) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <NotFound message="Game not found" />
+        <NotFound message="game" />
       </div>
     );
   }
