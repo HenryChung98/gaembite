@@ -1,14 +1,10 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
 import "@/app/unity.css";
 
 import GameNavBar from "./GameNavBar";
 
 export default function GamePlayer({ game }) {
-  const router = useRouter();
-  const [isNavVisible, setIsNavVisible] = useState(false);
-
   const [isMobile, setIsMobile] = useState(false);
   const unityInstanceRef = useRef(null);
   const scriptRef = useRef(null);
@@ -98,6 +94,14 @@ export default function GamePlayer({ game }) {
         scriptRef.current = null;
       }
       isInitializedRef.current = false;
+
+      // const setVh = () => {
+      //   document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+      // };
+    
+      // setVh();
+      // window.addEventListener('resize', setVh);
+      // return () => window.removeEventListener('resize', setVh);
     };
   }, [game]); // game prop이 변경될 때만 실행
 

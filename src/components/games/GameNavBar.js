@@ -16,6 +16,15 @@ export default function GameNavBar() {
       >
         {isNavVisible ? <GrUploadOption /> : <GrCircleQuestion />}
       </button>
+      <button
+        className={`fixed top-5 left-20 bg-indigo-500 opacity-50 p-2 rounded-xl z-[1001] 
+                    duration-300 ease-in-out`}
+        onClick={() => {
+          window.scrollBy({ top: 100, behavior: "smooth" });
+        }}
+      >
+        screen
+      </button>
       <nav
         className={`flex flex-col items-center opacity-50 p-2 justify-center border
                   border-indigo-500 fixed top-0 left-0 w-full p-4 rounded-xl z-[1000] 

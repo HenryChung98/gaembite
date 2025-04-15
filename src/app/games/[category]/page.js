@@ -1,4 +1,5 @@
 import { games } from "@/lib/games/gameData";
+import Link from "next/link";
 import GameCard from "@/components/games/GameCard";
 import NotFound from "@/app/not-found";
 
@@ -10,7 +11,7 @@ export default async function CategoryPage({ params }) {
   if (filteredGames.length === 0) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <NotFound message="No games found in this category"/>
+        <NotFound message="No games found in this category" />
       </div>
     );
   }
@@ -22,9 +23,9 @@ export default async function CategoryPage({ params }) {
       </h1>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredGames.map((game) => (
-          <a key={game.id} href={`/games/${category}/${game.id}`}>
+          <Link key={game.id} href={`/games/${category}/${game.id}`}>
             <GameCard game={game} />
-          </a>
+          </Link>
         ))}
       </div>
     </div>
