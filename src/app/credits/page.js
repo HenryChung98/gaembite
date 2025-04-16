@@ -22,7 +22,7 @@ export default function Credits() {
           Game Credits
         </h2>
         <button
-        className="bg-indigo-300 rounded-xl p-1 relative "
+        className="bg-indigo-400 text-gray-200 rounded-xl p-1 relative "
           onClick={(e) => {
             e.preventDefault();
             router.push("/");

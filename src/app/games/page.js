@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import NavBar from "@/components/NavBar";
 
 const CategoryButton = ({ category }) => {
   return (
@@ -6,7 +8,7 @@ const CategoryButton = ({ category }) => {
       <div className="flex justify-center mb-8">
         <Link
           href={`/games/${category}`}
-          className="w-full bg-zinc-700 text-gray-200 p-3 text-center border-1 rounded-xl uppercase font-bold hover:opacity-50 duration-100"
+          className="w-full bg-zinc-700 text-gray-200 p-3 m-1 text-center border-1 rounded-xl uppercase font-bold hover:opacity-50 duration-100"
         >
           {category}
         </Link>
@@ -17,10 +19,10 @@ const CategoryButton = ({ category }) => {
 
 export default function GamesPage() {
   return (
-    <div className="flex flex-col px-4 py-8 w-[300px] border-1">
-      {/* <h1 className="text-3xl font-bold mb-8 text-center">Games Gallery</h1> */}
-      <CategoryButton category="minimalism" />
+    <div className="grid grid-cols-2 grid-cols-2 gap-6 p-8 w-[500px]">
+      <NavBar />
       <CategoryButton category="test" />
+      <CategoryButton category="minimalism" />
     </div>
   );
 }

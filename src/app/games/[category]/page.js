@@ -2,6 +2,7 @@ import { games } from "@/lib/games/gameData";
 import Link from "next/link";
 import GameCard from "@/components/games/GameCard";
 import NotFound from "@/app/not-found";
+import NavBar from "@/components/NavBar";
 
 export default async function CategoryPage({ params }) {
   const { category } = await params;
@@ -18,6 +19,7 @@ export default async function CategoryPage({ params }) {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <NavBar />
       <h1 className="text-3xl font-bold mb-8 text-center">
         {category.toUpperCase()}
       </h1>

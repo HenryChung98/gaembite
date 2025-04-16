@@ -6,8 +6,7 @@ export default function NotFound({ message }) {
     <div className="flex flex-col items-center justify-center h-screen text-center">
       <Image
         src="/images/gaembite-404-web.webp"
-        alt="404"
-        // fill
+        alt="404-image"
         width={500}
         height={500}
         className="object-contain rounded"

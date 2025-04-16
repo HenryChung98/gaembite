@@ -1,9 +1,9 @@
 export const games = [
   {
-    id: "test",
+    id: "fallinggame",
     category: "test",
-    title: "Test Game",
-    description: "this is a test",
+    title: "Falling Gaem",
+    description: "falling gaem",
     thumbnail: "/unity/falling-game/test.png",
     buildPath: "/unity/falling-game/Build",
     width: 720,
