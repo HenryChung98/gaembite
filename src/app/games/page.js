@@ -23,6 +23,12 @@ export default function GamesPage() {
       <NavBar />
       <CategoryButton category="test" />
       <CategoryButton category="minimalism" />
+      <Link
+          href={`/gamess`}
+          className="w-full bg-zinc-700 text-gray-200 p-3 m-1 text-center border-1 rounded-xl uppercase font-bold hover:opacity-50 duration-100"
+        >
+          404
+        </Link>
     </div>
   );
 }
