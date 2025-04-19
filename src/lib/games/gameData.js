@@ -8,18 +8,27 @@ export const games = [
     buildPath: "/unity/balance-game/Build",
     width: 720,
     height: 1280,
-    mobile: true,
   },
 
   {
     id: "fallinggame",
-    category: "test",
+    category: "minimalism",
     title: "Falling Gaem",
     description: "falling gaem",
     thumbnail: "/unity/falling-game/falling-game-thumbnail.webp",
     buildPath: "/unity/falling-game/Build",
     width: 720,
     height: 1280,
-    mobile: false,
+  },
+
+  {
+    id: "minesweeper",
+    category: "web-based",
+    title: "Mine Sweeper",
+    description: "mine sweeper",
+    thumbnail: "/unity/falling-game/falling-game-thumbnail.webp",
+    buildPath: "/unity/falling-game/Build",
+    width: 720,
+    height: 1280,
   },
 ];

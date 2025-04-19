@@ -9,8 +9,10 @@ export default function GamePlayer({ game }) {
   const unityInstanceRef = useRef(null);
   const scriptRef = useRef(null);
   const isInitializedRef = useRef(false);
+  const unmountingRef = useRef(false);
 
   useEffect(() => {
+    unmountingRef.current = false;
     // 이미 초기화되었다면 리턴
     if (isInitializedRef.current) return;
     isInitializedRef.current = true;
@@ -52,15 +54,21 @@ export default function GamePlayer({ game }) {
 
     const initializeUnity = () => {
       const canvas = document.querySelector("#unity-canvas");
-      if (!canvas) return;
+      if (!canvas || unmountingRef.current) return;
 
       createUnityInstance(canvas, config, (progress) => {
+        if (unmountingRef.current) return;
         const progressBar = document.querySelector("#unity-progress-bar-full");
         if (progressBar) {
           progressBar.style.width = `${100 * progress}%`;
         }
       })
         .then((instance) => {
+          if (unmountingRef.current) {
+            instance.Quit();
+            return;
+          }
+
           unityInstanceRef.current = instance;
           const loadingBar = document.querySelector("#unity-loading-bar");
           if (loadingBar) {
@@ -83,22 +91,30 @@ export default function GamePlayer({ game }) {
     document.addEventListener("click", handleUserInteraction, { once: true });
 
     return () => {
-      // 정리 함수
+      unmountingRef.current = true;
+
       document.removeEventListener("click", handleUserInteraction);
+
       if (unityInstanceRef.current) {
-        unityInstanceRef.current.Quit();
-        unityInstanceRef.current = null;
+        try {
+          unityInstanceRef.current.Quit();
+          unityInstanceRef.current = null;
+        } catch (error) {
+          console.warn("Unity instance cleanup error:", error);
+        }
       }
-      if (scriptRef.current) {
-        document.body.removeChild(scriptRef.current);
+
+      if (scriptRef.current && scriptRef.current.parentNode) {
+        scriptRef.current.parentNode.removeChild(scriptRef.current);
         scriptRef.current = null;
       }
+
       isInitializedRef.current = false;
 
       // const setVh = () => {
       //   document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
       // };
-    
+
       // setVh();
       // window.addEventListener('resize', setVh);
       // return () => window.removeEventListener('resize', setVh);

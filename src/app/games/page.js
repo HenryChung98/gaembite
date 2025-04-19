@@ -21,7 +21,7 @@ export default function GamesPage() {
   return (
     <div className="grid grid-cols-2 grid-cols-2 gap-6 p-8 w-[500px]">
       <NavBar />
-      <CategoryButton category="test" />
+      <CategoryButton category="web-based" />
       <CategoryButton category="minimalism" />
       <Link
           href={`/gamess`}
