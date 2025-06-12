@@ -27,12 +27,12 @@ export function countNearbyMines(index, rowNum, colNum, minePositions) {
   return count;
 }
 
-export function openRecursive(index, opened, row, col, minePositions) {
+export function openRecursive(index, opened, row, col, minePositions, flaggedCells) {
   const queue = [index];
 
   while (queue.length) {
     const current = queue.pop();
-    if (opened.has(current)) continue;
+    if (opened.has(current) || flaggedCells.has(current)) continue; 
 
     opened.add(current);
 
@@ -45,7 +45,10 @@ export function openRecursive(index, opened, row, col, minePositions) {
           const nr = r + i;
           const nc = c + j;
           if (nr >= 0 && nr < row && nc >= 0 && nc < col) {
-            queue.push(nr * col + nc);
+            const nextIndex = nr * col + nc;
+            if (!opened.has(nextIndex) && !flaggedCells.has(nextIndex)) {
+              queue.push(nextIndex);
+            }
           }
         }
       }

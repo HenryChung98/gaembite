@@ -15,6 +15,8 @@ export default function MineSweeperBoard({ row, col, mineNum }) {
   const [revealedMines, setRevealedMines] = useState(new Set());
   const [isGameOver, setIsGameOver] = useState(false);
   const [isFlagMode, setIsFlagMode] = useState(false);
+  const [isGameWon, setIsGameWon] = useState(false);
+  const [temporaryFace, setTemporaryFace] = useState(null);
 
   const DEBUG_MODE = true;
 
@@ -24,7 +26,18 @@ export default function MineSweeperBoard({ row, col, mineNum }) {
     setFlaggedCells(new Set());
     setRevealedMines(new Set());
     setIsGameOver(false);
+    setIsGameWon(false);
   };
+
+  useEffect(() => {
+    const totalNonMines = totalCells - mineNum;
+    if (openCells.size === totalNonMines && !isGameOver) {
+      setIsGameWon(true);
+      setRevealedMines(new Set(minePositions));
+    } else {
+      setIsGameWon(false);
+    }
+  }, [openCells, minePositions, isGameOver, totalCells, mineNum]);
 
   useEffect(() => {
     resetGame();
@@ -32,11 +45,12 @@ export default function MineSweeperBoard({ row, col, mineNum }) {
 
   const handleRightClick = (e, index) => {
     e.preventDefault();
+    if (isGameOver || isGameWon) return;
     toggleFlag(index);
   };
 
   const handleCellTouch = (index) => {
-    if (isGameOver || openCells.has(index)) return;
+    if (isGameOver || isGameWon || openCells.has(index)) return;
 
     if (isFlagMode) {
       toggleFlag(index);
@@ -48,13 +62,28 @@ export default function MineSweeperBoard({ row, col, mineNum }) {
         setRevealedMines(new Set(minePositions));
       } else {
         const newOpenCells = new Set(openCells);
-        openRecursive(index, newOpenCells, row, col, minePositions);
+        openRecursive(index, newOpenCells, row, col, minePositions, flaggedCells);
+
+        const totalNonMines = totalCells - mineNum;
+        const predictedOpenCount = newOpenCells.size;
+
+        const willWin = predictedOpenCount === totalNonMines;
+
+        // ⭐ 얼굴 바꾸기: 단, 마지막 셀이 아니면만
+        if (!willWin) {
+          setTemporaryFace("/minesweeper/superstar.webp");
+          setTimeout(() => {
+            setTemporaryFace(null);
+          }, 200);
+        }
+
         setOpenCells(newOpenCells);
       }
     }
   };
 
   const toggleFlag = (index) => {
+    if (isGameOver || isGameWon) return;
     const newFlags = new Set(flaggedCells);
     if (newFlags.has(index)) newFlags.delete(index);
     else newFlags.add(index);
@@ -74,27 +103,36 @@ export default function MineSweeperBoard({ row, col, mineNum }) {
     return "";
   };
 
-  return (
-    <div className="m-10 flex flex-col justify-center items-center gap-5">
-      <div className="flex items-center space-x-4 mb-2">
-        <button onClick={resetGame}>
-          <Image
-            src="/minesweeper/smile.png"
-            alt="restart"
-            width={50}
-            height={50}
-            className="object-contain rounded"
-          />
-        </button>
+  const getFaceImage = () => {
+    if (temporaryFace) return temporaryFace;
+    if (isGameOver) return "/minesweeper/dizzy.webp";
+    if (isGameWon) return "/minesweeper/sunglasses.webp";
+    return "/minesweeper/smile.webp";
+  };
 
-        <button
-          onClick={() => setIsFlagMode((prev) => !prev)}
-          className={`px-3 py-2 text-white rounded ${
-            isFlagMode ? "bg-red-500" : "bg-gray-500"
-          }`}
-        >
-          🚩 {isFlagMode ? "Flag ON" : "Flag OFF"}
-        </button>
+  return (
+    <div className="m-10 flex flex-col justify-center items-center gap-2">
+      <div className="flex items-center space-x-4 mb-2">
+        <div className="flex flex-col items-center gap-2">
+          <button onClick={resetGame}>
+            <Image
+              src={getFaceImage()}
+              alt="restart"
+              width={60}
+              height={60}
+              className="object-contain rounded bg-[#9fb2f1] border-3 border-[#07133b] p-1"
+            />
+          </button>
+
+          <button
+            onClick={() => setIsFlagMode((prev) => !prev)}
+            className={`p-1 text-white rounded ${
+              isFlagMode ? "bg-[#1d2c5a]" : "bg-[#07133b]"
+            }`}
+          >
+            🚩
+          </button>
+        </div>
       </div>
 
       <div
@@ -106,12 +144,14 @@ export default function MineSweeperBoard({ row, col, mineNum }) {
             key={index}
             onClick={() => handleCellTouch(index)}
             onContextMenu={(e) => handleRightClick(e, index)}
-            className={`w-[30px] h-[30px] border border-gray-400 flex items-center justify-center text-sm font-bold
-              ${
-                openCells.has(index) || revealedMines.has(index)
-                  ? "bg-gray-500"
-                  : "bg-gray-900 hover:bg-gray-400 cursor-pointer"
-              }`}
+            className={`w-[30px] h-[30px] rounded flex items-center justify-center text-sm font-bold
+  ${
+    revealedMines.has(index)
+      ? "bg-red-500"
+      : openCells.has(index)
+      ? "bg-[#1d2c5a]"
+      : "bg-[#07133b] hover:opacity-70 cursor-pointer"
+  }`}
           >
             {flaggedCells.has(index) &&
             !openCells.has(index) &&
