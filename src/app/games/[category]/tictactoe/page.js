@@ -1,16 +1,15 @@
 "use client";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo } from "react";
 import GameNavBar from "@/components/games/GameNavBar";
-import MineSweeperBoard from "./components/MineSweeperBoard";
+
 
 const DIFFICULTY_LEVELS = {
   Beginner: { row: 10, col: 10, mineNum: 9 },
   Intermediate: { row: 13, col: 13, mineNum: 30 },
   Expert: { row: 20, col: 15, mineNum: 70 },
-  // Challenge: { row: 77, col: 77, mineNum: 2401 },
 };
 
-export default function Minesweeper() {
+export default function TicTacToe() {
   const [isStarted, setIsStarted] = useState(false);
   const [boardSetting, setBoardSetting] = useState({
     row: 0,

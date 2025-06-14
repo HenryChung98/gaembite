@@ -18,7 +18,7 @@ export default function MineSweeperBoard({ row, col, mineNum }) {
   const [isGameWon, setIsGameWon] = useState(false);
   const [temporaryFace, setTemporaryFace] = useState(null);
 
-  const DEBUG_MODE = true;
+  const DEBUG_MODE = false;
 
   const resetGame = () => {
     setMinePositions(generateMinePositions(mineNum, totalCells));
@@ -62,14 +62,20 @@ export default function MineSweeperBoard({ row, col, mineNum }) {
         setRevealedMines(new Set(minePositions));
       } else {
         const newOpenCells = new Set(openCells);
-        openRecursive(index, newOpenCells, row, col, minePositions, flaggedCells);
+        openRecursive(
+          index,
+          newOpenCells,
+          row,
+          col,
+          minePositions,
+          flaggedCells
+        );
 
         const totalNonMines = totalCells - mineNum;
         const predictedOpenCount = newOpenCells.size;
 
         const willWin = predictedOpenCount === totalNonMines;
 
-        // ⭐ 얼굴 바꾸기: 단, 마지막 셀이 아니면만
         if (!willWin) {
           setTemporaryFace("/minesweeper/superstar.webp");
           setTimeout(() => {
@@ -137,14 +143,14 @@ export default function MineSweeperBoard({ row, col, mineNum }) {
 
       <div
         className="grid"
-        style={{ gridTemplateColumns: `repeat(${col}, 30px)` }}
+        style={{ gridTemplateColumns: `repeat(${col}, 25px)` }}
       >
         {Array.from({ length: totalCells }).map((_, index) => (
           <div
             key={index}
             onClick={() => handleCellTouch(index)}
             onContextMenu={(e) => handleRightClick(e, index)}
-            className={`w-[30px] h-[30px] rounded flex items-center justify-center text-sm font-bold
+            className={`w-[25px] h-[25px] rounded flex items-center justify-center text-sm font-bold
   ${
     revealedMines.has(index)
       ? "bg-red-500"

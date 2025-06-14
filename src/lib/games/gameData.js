@@ -1,4 +1,28 @@
 export const games = [
+  // ==============================web based==============================
+
+  {
+    id: "minesweeper",
+    category: "web-based",
+    title: "Mine Sweeper",
+    description: "mine sweeper",
+    thumbnail: "/minesweeper/minesweeper-thumbnail.webp",
+    width: 720,
+    height: 1280,
+  },
+
+  {
+    id: "tictactoe",
+    category: "web-based",
+    title: "Tic Tac Toe 5",
+    description: "tic tac toe 5 version",
+    thumbnail: "/minesweeper/minesweeper-thumbnail.webp",
+    width: 720,
+    height: 1280,
+  },
+
+  // ==============================minimalism==============================
+
   {
     id: "balancegame",
     category: "minimalism",
@@ -15,17 +39,6 @@ export const games = [
     category: "minimalism",
     title: "Falling Gaem",
     description: "falling gaem",
-    thumbnail: "/unity/falling-game/falling-game-thumbnail.webp",
-    buildPath: "/unity/falling-game/Build",
-    width: 720,
-    height: 1280,
-  },
-
-  {
-    id: "minesweeper",
-    category: "web-based",
-    title: "Mine Sweeper",
-    description: "mine sweeper",
     thumbnail: "/unity/falling-game/falling-game-thumbnail.webp",
     buildPath: "/unity/falling-game/Build",
     width: 720,
