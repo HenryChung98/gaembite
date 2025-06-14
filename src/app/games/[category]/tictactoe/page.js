@@ -51,7 +51,7 @@ export default function TicTacToe() {
     <>
       <GameNavBar />
       <div className="bg-[#38406f] rounded">
-        {!isStarted ? (
+        {/* {!isStarted ? (
           <div className="bg-[#07133b] rounded-xl m-10 p-10 flex flex-col md:flex-row items-center gap-5">
             {difficultyButtons}
           </div>
@@ -61,7 +61,7 @@ export default function TicTacToe() {
             col={boardSetting.col}
             mineNum={boardSetting.mineNum}
           />
-        )}
+        )} */}
       </div>
     </>
   );
